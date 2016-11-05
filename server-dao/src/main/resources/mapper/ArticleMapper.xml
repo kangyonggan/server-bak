@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kangyonggan.server.mapper.ArticleMapper">
+    <resultMap id="BaseResultMap" type="com.kangyonggan.server.model.Article">
+        <!--
+          WARNING - @mbggenerated
+        -->
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="summary" property="summary" jdbcType="VARCHAR"/>
+        <result column="category_code" property="categoryCode" jdbcType="VARCHAR"/>
+        <result column="category_name" property="categoryName" jdbcType="VARCHAR"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
+        <result column="created_time" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="updated_time" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="body" property="body" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+
+    <select id="selectArticles" parameterType="String" resultMap="BaseResultMap">
+        SELECT
+        a.id, a.title, a.summary, a.category_code, a.category_name, a.created_time
+        FROM
+        article a
+        <where>
+            a.is_deleted = 0
+            AND a.id IN
+            (
+            SELECT
+            ai.article_id
+            FROM
+            article_index ai
+            WHERE match(ai.title, ai.body, ai.category_name) against(#{key} IN BOOLEAN MODE)
+            )
+        </where>
+        ORDER BY
+        a.id desc
+    </select>
+
+    <select id="findArticlesByPage" parameterType="String" resultMap="BaseResultMap">
+        SELECT
+        a.id, a.title, a.summary, a.category_code, a.category_name, a.created_time
+        FROM article a
+        <where>
+            <if test="categoryCode != null and categoryCode != ''">
+                a.category_code = #{categoryCode}
+            </if>
+            AND a.is_deleted = 0
+        </where>
+        ORDER BY a.id DESC
+    </select>
+
+</mapper>

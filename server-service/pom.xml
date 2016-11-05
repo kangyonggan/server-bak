@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>server</artifactId>
+        <groupId>com.kangyonggan.server</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>server-service</artifactId>
+
+    <description>对外接口的定义</description>
+    <name>Server :: Module :: Service</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.kangyonggan.server</groupId>
+            <artifactId>server-model</artifactId>
+        </dependency>
+    </dependencies>
+</project>
