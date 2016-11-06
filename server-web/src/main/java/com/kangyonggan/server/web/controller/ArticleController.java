@@ -2,7 +2,6 @@ package com.kangyonggan.server.web.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.kangyonggan.server.biz.service.ServerArticleService;
-import com.kangyonggan.server.biz.service.ServerCategoryService;
 import com.kangyonggan.server.model.Article;
 import com.kangyonggan.server.model.Category;
 import com.kangyonggan.server.model.dto.ResponseDto;
@@ -28,9 +27,6 @@ public class ArticleController {
     private static final String PATH_ROOT = "article/";
     private static final String PATH_LIST = PATH_ROOT + "list";
     private static final String PATH_FORM = PATH_ROOT + "form";
-
-    @Autowired
-    private ServerCategoryService serverCategoryService;
 
     @Autowired
     private CategoryService categoryService;
