@@ -41,10 +41,25 @@
         a.id, a.title, a.summary, a.category_code, a.category_name, a.created_time
         FROM article a
         <where>
+            a.is_deleted = 0
             <if test="categoryCode != null and categoryCode != ''">
-                a.category_code = #{categoryCode}
+                AND a.category_code = #{categoryCode}
             </if>
-            AND a.is_deleted = 0
+        </where>
+        ORDER BY a.id DESC
+    </select>
+
+    <select id="selectArticlesWithCondition" resultMap="BaseResultMap">
+        SELECT
+        a.id, a.title, a.summary, a.category_code, a.is_deleted, a.category_name, a.created_time
+        FROM article a
+        <where>
+            <if test="code != null and code != ''">
+                AND a.category_code = #{code}
+            </if>
+            <if test="title != null and title != ''">
+                AND a.title LIKE '%' + #{title} + '%'
+            </if>
         </where>
         ORDER BY a.id DESC
     </select>

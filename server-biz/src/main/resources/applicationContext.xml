@@ -29,6 +29,7 @@
             <tx:method name="delete*" propagation="REQUIRED"/>
             <tx:method name="update*" propagation="REQUIRED"/>
             <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="recover*" propagation="REQUIRED"/>
 
             <tx:method name="search*" read-only="true" propagation="REQUIRED"/>
             <tx:method name="find*" read-only="true" propagation="REQUIRED"/>
@@ -41,6 +42,10 @@
     <aop:config>
         <aop:pointcut id="transactionPointcut" expression="execution(* com.kangyonggan.server.biz.impl..*.*(..))"/>
         <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice"/>
+
+        <aop:aspect id="serviceImplAscpect" ref="serviceImplAscpect">
+            <aop:around pointcut-ref="transactionPointcut" method="around"/>
+        </aop:aspect>
     </aop:config>
 
 </beans>

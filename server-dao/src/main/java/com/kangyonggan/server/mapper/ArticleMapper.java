@@ -24,4 +24,13 @@ public interface ArticleMapper extends MyMapper<Article> {
      * @return
      */
     List<Article> findArticlesByPage(@Param("categoryCode") String categoryCode);
+
+    /**
+     * 按条件查找文章
+     *
+     * @param code
+     * @param title
+     * @return
+     */
+    List<Article> selectArticlesWithCondition(@Param("code") String code, @Param("title") String title);
 }

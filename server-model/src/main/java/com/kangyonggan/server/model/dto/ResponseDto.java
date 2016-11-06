@@ -1,6 +1,7 @@
 package com.kangyonggan.server.model.dto;
 
 import com.github.pagehelper.PageInfo;
+import com.kangyonggan.server.model.AppConstants;
 import com.kangyonggan.server.model.BaseModel;
 import lombok.Data;
 
@@ -37,4 +38,26 @@ public class ResponseDto<T> extends BaseModel {
      * 响应数据
      */
     private PageInfo<T> page;
+
+    public ResponseDto() {
+
+    }
+
+    public ResponseDto(T entity) {
+        this.entity = entity;
+        respCode = AppConstants.RESP_SUCCESS;
+        respMsg = "请求成功";
+    }
+
+    public ResponseDto(List<T> data) {
+        this.data = data;
+        respCode = AppConstants.RESP_SUCCESS;
+        respMsg = "请求成功";
+    }
+
+    public ResponseDto(PageInfo<T> page) {
+        this.page = page;
+        respCode = AppConstants.RESP_SUCCESS;
+        respMsg = "请求成功";
+    }
 }
