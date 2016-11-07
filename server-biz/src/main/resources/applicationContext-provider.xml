@@ -14,7 +14,7 @@
     <dubbo:registry address="${dubbo.registry.address}"/>
 
     <!-- dubbo注册端口 -->
-    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"/>
+    <dubbo:protocol name="dubbo" host="42.196.155.120" port="${dubbo.protocol.port}"/>
 
     <!-- 监听注册 -->
     <dubbo:monitor protocol="registry"/>
